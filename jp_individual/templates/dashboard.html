@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title> Employee Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to top left, #ffe57f, #ffccbc);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    .header {
+      background: #ff8a65;
+      padding: 20px;
+      border-bottom: 4px dashed #ff7043;
+      color: white;
+      text-align: center;
+      font-size: 28px;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .funny-btn {
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 30px;
+      padding: 10px 20px;
+      margin: 5px;
+    }
+
+    .table {
+      background-color: #fffde7;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .action-btns .btn {
+      margin-right: 5px;
+    }
+
+    .emoji {
+      font-size: 24px;
+    }
+
+    .add-btn {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .logout-btn {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .table thead {
+      background-color: #fff9c4;
+    }
+
+    .card-box {
+      background: #ffecb3;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+      margin-top: 20px;
+    }
+
+    .footer-note {
+      font-size: 14px;
+      text-align: center;
+      margin-top: 30px;
+      color: #6d4c41;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    😂 Welcome, {{ session.fullname }}! Time to Manage Your Minions 🧑‍💼🐵
+  </div>
+
+  <div class="container mt-4">
+
+    <div class="d-flex justify-content-between">
+      <a href="/add" class="btn funny-btn add-btn">Add New Employee</a>
+      <a href="/logout" class="btn funny-btn logout-btn">🚪 Logout</a>
+    </div>
+
+    <div class="card-box mt-4">
+      <h4 class="text-center mb-3">📋 Employee List</h4>
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr class="text-center">
+            <th>Name 😎</th>
+            <th>Position 💼</th>
+            <th>Salary 💸</th>
+            <th>Actions 🛠️</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for emp in employees %}
+          <tr>
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.position }}</td>
+            <td>₱{{ emp.salary }}</td>
+            <td class="action-btns">
+              <a href="/edit/{{ emp.id }}" class="btn btn-warning btn-sm">✏️ Edit</a>
+              <a href="/delete/{{ emp.id }}" onclick="return confirm('Are you really firing this brave soul? 😢')" class="btn btn-danger btn-sm">❌ Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer-note">
+      🤖 Tip: Be kind to your employees. They might become your boss someday! 😜
+    </div>
+
+  </div>
+</body>
+</html>
